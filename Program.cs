@@ -1,7 +1,16 @@
+using BlogDapper.Interfaces;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
+
+/* Por cada uno de los repositorio  se añade como inyección de dependencias los repositorios*/
+builder.Services.AddScoped<ICategoria, CategoriaImple>();
+
+
+
 
 var app = builder.Build();
 
@@ -18,6 +27,6 @@ app.UseAuthorization();
 
 app.MapControllerRoute(
 	name: "default",
-	pattern: "{controller=Home}/{action=Index}/{id?}");
+	pattern: "{area=Front}/{controller=Inicio}/{action=Index}/{id?}"); // acá indicamos por donde inciara la aplicaion
 
 app.Run();
